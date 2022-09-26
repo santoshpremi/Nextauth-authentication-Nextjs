@@ -1,14 +1,21 @@
 import Link from "next/link";
 import styles from '../styles/Home.module.css'
-// import { unstable_getServerSession } from "next-auth";
-// import { authOptions } from "./api/auth/[...nextauth]";
+import Stack from '@mui/material/Stack';
+import Button from "@mui/material/Button";
+import { signOut } from "next-auth/react";
+
 export default function Home() {
   return (
     <div className={styles.container}>
-      <nav>
-            <Link href="/about"> About </Link>{" "} &nbsp;&nbsp;&nbsp;&nbsp;
-            <Link href="/contact"> Contact </Link>{" "}      
-      </nav>
+     <Stack spacing={4} direction="row">
+            <Link href="/about" passHref>
+                <Button variant="contained" color="secondary">About</Button>
+             </Link>{" "} 
+             <Link href="/contact" passHref>
+                <Button variant="contained" color="secondary">Contact</Button>
+             </Link>{" "}  
+            <Button variant="contained" onClick={signOut}>logOut</Button>
+    </Stack>
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to Next.js
@@ -24,29 +31,4 @@ export default function Home() {
 }
 
 
-// export async function getServerSideProps(context) {
-//   const session = await unstable_getServerSession(
-//     context.req,
-//     context.res,
-//     authOptions
-//   );
-//   context.res.setHeader(
-// 	'Cache-Control',
-// 	'public, s-maxage=10, stale-while-revalidate=59'
-//   )
 
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/about",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {
-
-//     },
-//   };
-// }

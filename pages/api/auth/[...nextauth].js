@@ -10,6 +10,8 @@ export const authOptions = {
 
 	providers: [
 		CredentialsProvider({
+            email:'Credentials',
+            password:'Credentials',
 			async authorize(credentials, req) {
 				const res = await fetch("http://localhost:5000/user/login", {
 					method: 'POST',
@@ -19,10 +21,19 @@ export const authOptions = {
 				const user = await res.json();
 				if (res.ok && user) {
 					return user;
-				}
-				return null;
-			},
+				}	
 
+            /* hardcode */
+
+            // if (credentials.email == "abc" && credentials.password == "123"){
+            //     return{
+            //             user: {
+            //                 name: "ABC"
+            //             }
+            //     }
+            // } 
+            return null;
+          }
 
 		})
 	],
